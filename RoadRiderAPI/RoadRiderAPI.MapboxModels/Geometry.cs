@@ -2,7 +2,6 @@
 {
     public class Geometry
     {
-        public double[] Coordinates { get; set; }
-
+        public IEnumerable<double> Coordinates { get; set; }
     }
 }

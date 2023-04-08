@@ -10,7 +10,6 @@ namespace RoadRiderAPI.MapboxModels
     {
         public string Type { get; set; }       
 
-        public GeocodingDTO[] Features { get; set; }
-
+        public IEnumerable<GeocodingDTO> Features { get; set; }
     }
 }

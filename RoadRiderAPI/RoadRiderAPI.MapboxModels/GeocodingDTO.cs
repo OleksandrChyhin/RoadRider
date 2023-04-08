@@ -6,7 +6,7 @@
 
         public string Type { get; set; }
 
-        public string[] PlaceType { get; set; }
+        public IEnumerable<string> PlaceType { get; set; }
 
         public double Relevance { get; set; }       
 
