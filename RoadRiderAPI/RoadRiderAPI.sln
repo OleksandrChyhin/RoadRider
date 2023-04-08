@@ -5,7 +5,11 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoadRiderAPI", "RoadRiderAPI\RoadRiderAPI.csproj", "{3B37E726-46A3-4C93-A1AA-63ACEE3DF211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadRiderAPI.Core", "RoadRiderAPI.Core\RoadRiderAPI.Core.csproj", "{9E571F0E-E6B8-41DD-95F1-FB8830F1D186}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoadRiderAPI.Core", "RoadRiderAPI.Core\RoadRiderAPI.Core.csproj", "{9E571F0E-E6B8-41DD-95F1-FB8830F1D186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadRiderAPI.MapboxModels", "RoadRiderAPI.MapboxModels\RoadRiderAPI.MapboxModels.csproj", "{7AC8BF7B-9339-4A17-A555-6B92F9FCCC7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{46398B5F-8A18-4D07-80B7-A66D890EF510}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{9E571F0E-E6B8-41DD-95F1-FB8830F1D186}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E571F0E-E6B8-41DD-95F1-FB8830F1D186}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E571F0E-E6B8-41DD-95F1-FB8830F1D186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC8BF7B-9339-4A17-A555-6B92F9FCCC7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC8BF7B-9339-4A17-A555-6B92F9FCCC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC8BF7B-9339-4A17-A555-6B92F9FCCC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC8BF7B-9339-4A17-A555-6B92F9FCCC7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46398B5F-8A18-4D07-80B7-A66D890EF510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46398B5F-8A18-4D07-80B7-A66D890EF510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46398B5F-8A18-4D07-80B7-A66D890EF510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46398B5F-8A18-4D07-80B7-A66D890EF510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
