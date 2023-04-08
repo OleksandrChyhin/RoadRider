@@ -4,7 +4,7 @@ using RoadRiderAPI.Core.MapboxAPIs.Geocodings;
 namespace RoadRiderAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GeocodingsController : ControllerBase
     {
         readonly IGeocodingService _geocodingService;
@@ -13,11 +13,12 @@ namespace RoadRiderAPI.Controllers
 
         public GeocodingsController(ILogger<GeocodingsController> logger, IGeocodingService geocodingService)
         {
-            _geocodingService= geocodingService;
+            _geocodingService = geocodingService;
             _logger = logger;
         }
-        [HttpGet(Name = "ForwardGeocoding")]
-        public async Task<IActionResult> Get(string query)
+
+        [HttpGet("ForwardGeocoding")]
+        public async Task<IActionResult> GetForwardGeocoding(string query)
         {
             try
             {
@@ -28,8 +29,22 @@ namespace RoadRiderAPI.Controllers
             {
                 _logger.LogError(ex, ex.Message);
                 return BadRequest(ex.Message);
-            }            
-            
+            }
+        }
+
+        [HttpGet("ReverseGeocoding")]
+        public async Task<IActionResult> GetReverseGeocoding(double longtitude, double latitude)
+        {
+            try
+            {
+                var result = await _geocodingService.ReverseGeocoding(longtitude, latitude);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
     }

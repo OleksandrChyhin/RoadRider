@@ -1,5 +1,4 @@
 ﻿using RoadRiderAPI.MapboxModels;
-using System.Drawing;
 
 namespace ViewModels
 {
@@ -9,7 +8,7 @@ namespace ViewModels
 
         public string Type { get; set; }
 
-        public string[] PlaceType { get; set; }
+        public IEnumerable<string> PlaceType { get; set; }
 
         public double Relevance { get; set; }
 
