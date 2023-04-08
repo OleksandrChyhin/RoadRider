@@ -14,23 +14,20 @@ namespace RoadRiderClient.Core.Https
             _httpClient = new HttpClient();
         }
 
-        public async Task<TResult> GetAsync<TResult>(string urlRequest)
+        public async Task<TResult> GetAsync<TResult>(Uri urlRequest)
         {
-            var response = await _httpClient.GetAsync(new Uri(urlRequest));
+            var response = await _httpClient.GetAsync(urlRequest);
+
+            var json = await response.Content.ReadAsStringAsync();
+
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(response.ToString());
+                throw new Exception(json);
             }
 
-            return await ConvertResponseContent<TResult>(response.Content);
+            return JsonConvert.DeserializeObject<TResult>(json);
         }
 
         public void Dispose() => _httpClient?.Dispose();
-
-        protected async virtual Task<TResult> ConvertResponseContent<TResult>(IHttpContent content)
-        {
-            var json = await content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResult>(json);
-        }
     }
 }
