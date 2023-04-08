@@ -3,6 +3,5 @@
     public class Properties
     {
         public string Address { get; set; }
-
     }
 }

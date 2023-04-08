@@ -26,16 +26,17 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
             return result.Features.Select(x => MapToGeocodingOutputModel(x));
         }
 
-        public async Task ReverseGeocoding((double, double) search/*, string language ="u s", int limit = 5*/)
+        public async Task<IEnumerable<GeocodingOutputModel>> ReverseGeocoding(double longtitude, double latitude/*, string language ="u s", int limit = 5*/)
         {
-            var url = $"{_defaultUrl}/{APIName}{Endpoint}/{search.Item1},{search.Item2}.json{TokenParameter}";
-            await _httpClientService.GetAsync<string>(url);
+            var url = $"{_defaultUrl}/{APIName}{Endpoint}/{longtitude},{latitude}.json{TokenParameter}";
+            var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
+            return (IEnumerable<GeocodingOutputModel>)result.Features.Select(x => MapToGeocodingOutputModel(x)).First();
         }
 
         GeocodingOutputModel MapToGeocodingOutputModel(GeocodingDTO geocodingDTO)
         {
-            var longtityde = geocodingDTO.Geometry.Coordinates[0];
-            var latitude = geocodingDTO.Geometry.Coordinates[1];
+            var longtityde = geocodingDTO.Geometry.Coordinates.ElementAt(0);
+            var latitude = geocodingDTO.Geometry.Coordinates.ElementAt(1);
             var geocodingOutputModel = new GeocodingOutputModel
             {
                 Id = geocodingDTO.Id,
