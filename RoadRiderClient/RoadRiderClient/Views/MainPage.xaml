@@ -9,6 +9,27 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <NavigationView x:Name="Navigation"
+                        x:Uid="NavigationBar"
+                        IsBackButtonVisible="Collapsed" 
+                        IsPaneOpen="False" 
+                        PaneDisplayMode="LeftCompact"
+                        SelectionChanged="Navigation_SelectionChanged">
 
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Uid="NavigationBarItemSearch"
+                                    Tag="SearchPage"
+                                    Icon="Find"/>
+            </NavigationView.MenuItems>
+
+            <NavigationView.Content>
+                <Grid>
+                    <Frame x:Name="ContentFrame">
+
+                    </Frame>
+                </Grid>
+            </NavigationView.Content>
+        </NavigationView>
     </Grid>
 </Page>

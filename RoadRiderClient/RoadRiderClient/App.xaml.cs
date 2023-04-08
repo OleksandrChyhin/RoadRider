@@ -98,6 +98,7 @@ namespace RoadRiderClient
             var services = new ServiceCollection();
 
             Dependencies.RegisterSettings(services);
+            Dependencies.RegisterViewModels(services);
 
             Container = services.BuildServiceProvider();
         }
