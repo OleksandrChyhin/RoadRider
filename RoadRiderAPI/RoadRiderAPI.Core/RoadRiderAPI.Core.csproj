@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MapboxAPI%27s\**" />
+    <EmbeddedResource Remove="MapboxAPI%27s\**" />
+    <None Remove="MapboxAPI%27s\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoadRiderAPI.MapboxModels\RoadRiderAPI.MapboxModels.csproj" />
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
