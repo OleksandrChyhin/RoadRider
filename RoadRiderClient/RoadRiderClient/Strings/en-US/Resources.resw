@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavigationBar.PaneTitle" xml:space="preserve">
+  <data name="MainPageNavigationBar.PaneTitle" xml:space="preserve">
     <value>Road Rider</value>
   </data>
-  <data name="NavigationBarItemSearch.Content" xml:space="preserve">
+  <data name="MainPageNavigationBarItemMap.Content" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MapPageNavigationBarItemDirection.Content" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="MapPageNavigationBarItemSearch.Content" xml:space="preserve">
     <value>Search</value>
   </data>
 </root>

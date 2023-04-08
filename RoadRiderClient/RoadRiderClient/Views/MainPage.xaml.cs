@@ -43,7 +43,7 @@ namespace RoadRiderClient.Views
         {
             switch (pageTag)
             {
-                case "SearchPage": return typeof(SearchPage);
+                case "MapPage": return typeof(MapPage);
                 default: throw new Exception();
             }
         }
