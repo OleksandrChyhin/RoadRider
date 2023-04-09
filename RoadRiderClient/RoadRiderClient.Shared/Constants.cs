@@ -2,6 +2,7 @@
 {
     public class Constants
     {
+        public const string You = "You";
         public const string Cancel = "Cancel";
 
         public class Error

@@ -16,12 +16,7 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
 
         public async Task<IEnumerable<GeocodingOutputModel>> ForwardGeocodingAsync(string search/*, bool autocomplete = false, string language = "us", int limit = 7*/)
         {
-            //"https://api.mapbox.com/geocoding/v5/mapbox.places/Odes.json?access_token={accessToken}"
-
-            //var queryParams = new[] {$"{search}.json",TokenParameter};
-            //var querry = string.Join("/", queryParams);
-            //var uriBuilder = new UriBuilder(BaseUrl) {Query = querry};
-            var url = $"{BaseUrl}{Endpoint}/{search}.json{TokenParameter}";
+            var url = $"{BaseUrl}{Endpoint}/{search}.json{TokenParameter}&language=en";
             var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
             return result.Features.Select(x => MapToGeocodingOutputModel(x));
         }
@@ -51,6 +46,8 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
                 PlaceType = geocodingDTO.PlaceType,
                 Relevance = geocodingDTO.Relevance,
                 PlaceName = geocodingDTO.PlaceName,
+                Text = geocodingDTO.Text,
+                Category = geocodingDTO.Properties.Category,
                 Coordinates = new PointDTO
                 {
                     Latitude = latitude,

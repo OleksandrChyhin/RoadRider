@@ -8,5 +8,10 @@ namespace RoadRiderClient.Core.ProviderServices.Geocodings
     {
         Task<IEnumerable<GeocodingDTO>> GetForwardGeocodingAsync(string searchQuery);
         Task<IEnumerable<GeocodingDTO>> GetReverseGeocodingAsync(string searchQuery);
+        Task<IEnumerable<GeocodingDTO>> GetGeolocationByPlacementType(string search,
+                                                                      double lat,
+                                                                      double @long,
+                                                                      string type,
+                                                                      int limit = 10);
     }
 }

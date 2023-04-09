@@ -13,7 +13,8 @@ namespace RoadRiderClient
         public static void RegisterViewModels(IServiceCollection services)
         {
             services.AddScoped<MainPageViewModel>()
-                    .AddScoped<MapViewModel>();
+                    .AddScoped<MapViewModel>()
+                    .AddScoped<SettingsViewModel>();
         }
 
         public static void RegisterServices(IServiceCollection services)

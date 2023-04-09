@@ -27,6 +27,29 @@ namespace RoadRiderClient.Core.ProviderServices.Geocodings
             return await _httpService.GetAsync<IEnumerable<GeocodingDTO>>(builder.Uri);
         }
 
+        public async Task<IEnumerable<GeocodingDTO>> GetGeolocationByPlacementType(string search,
+                                                                                   double lat,
+                                                                                   double @long,
+                                                                                   string type,
+                                                                                   int limit = 10)
+        {
+            var @params = new[]
+            {
+                $"latitude={lat}",
+                $"longtitude={@long}",
+                $"search={search}",
+                $"type={type}",
+                $"limit={limit}"
+            };
+
+            var builder = new UriBuilder($"{Url}/GeolocationByPlacementType")
+            {
+                Query = string.Join("&", @params)
+            };
+
+            return await _httpService.GetAsync<IEnumerable<GeocodingDTO>>(builder.Uri);
+        }
+
         public async Task<IEnumerable<GeocodingDTO>> GetReverseGeocodingAsync(string searchQuery)
         {
             var (lat, @long) = searchQuery.GetCoord();
