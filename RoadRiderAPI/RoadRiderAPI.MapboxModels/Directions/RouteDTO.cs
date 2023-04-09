@@ -19,6 +19,5 @@
         public string VoiceLocale { get; set; }
 
         public IEnumerable<WaypointDTO> Waypoints{get;set;}
-
 }
 }

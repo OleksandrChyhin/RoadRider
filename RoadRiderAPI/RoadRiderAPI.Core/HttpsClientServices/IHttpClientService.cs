@@ -7,6 +7,7 @@ namespace RoadRiderAPI.Core.HttpsClientServices
         DefaultContractResolver ContractResolver { get; set; }
 
         Task<TResult> GetAsync<TResult>(string urlRequest);
+
         Task<TResult> GetAsync<TResult>(Uri uri);
     }
 }
