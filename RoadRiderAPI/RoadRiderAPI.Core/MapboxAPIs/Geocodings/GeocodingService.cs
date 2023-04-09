@@ -14,7 +14,7 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
 
         string Endpoint => "mapbox.places";
 
-        public async Task<IEnumerable<GeocodingOutputModel>> ForwardGeocodingAsync(string search/*, bool autocomplete = false, string language = "us", int limit = 7*/)
+        public async Task<IEnumerable<GeocodingOutputModel>> ForwardGeocodingAsync(string search)
         {
             var url = $"{BaseUrl}{Endpoint}/{search}.json{TokenParameter}&language=en";
             var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
@@ -28,7 +28,7 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
             return result.Features.Where(x => x.PlaceType.Contains(type)).Select(x => MapToGeocodingOutputModel(x));
         }        
 
-        public async Task<GeocodingOutputModel> ReverseGeocodingAsync(double latitude, double longtitude /*, string language ="u s", int limit = 5*/)
+        public async Task<GeocodingOutputModel> ReverseGeocodingAsync(double latitude, double longtitude)
         {
             var url = $"{BaseUrl}{Endpoint}/{longtitude:#.000},{latitude:#.000}.json{TokenParameter}";
             var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
