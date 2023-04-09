@@ -1,6 +1,4 @@
-﻿using RoadRiderAPI.MapboxModels.Geocoding;
-
-namespace RoadRiderAPI.MapboxModels.Directions
+﻿namespace RoadRiderAPI.MapboxModels.Directions
 {
     public class WaypointDTO
     {
