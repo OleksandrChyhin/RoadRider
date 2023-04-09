@@ -124,8 +124,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\SearchPage.xaml.cs">
-      <DependentUpon>SearchPage.xaml</DependentUpon>
+    <Compile Include="Views\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +152,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SearchPage.xaml">
+    <Page Include="Views\MapPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,6 +172,14 @@
     <ProjectReference Include="..\RoadRiderClient.Core\RoadRiderClient.Core.csproj">
       <Project>{699AF1A8-F5ED-438F-9900-1C8E41230728}</Project>
       <Name>RoadRiderClient.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoadRiderClient.Models\RoadRiderClient.Models.csproj">
+      <Project>{9586e4a1-9439-4d9d-ae49-264f4c8bbab7}</Project>
+      <Name>RoadRiderClient.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoadRiderClient.Shared\RoadRiderClient.Shared.csproj">
+      <Project>{3C85BBB1-62D8-44FC-93B2-9F9D84C064D2}</Project>
+      <Name>RoadRiderClient.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\RoadRiderClient.ViewModels\RoadRiderClient.ViewModels.csproj">
       <Project>{9304ad9a-2bd1-4482-bce1-7f2dfe106a46}</Project>

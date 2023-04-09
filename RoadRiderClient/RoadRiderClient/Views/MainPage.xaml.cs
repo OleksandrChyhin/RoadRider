@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RoadRiderClient.Core.Settings;
 using RoadRiderClient.ViewModels;
 using System;
 using Windows.UI.Xaml;
@@ -43,7 +44,7 @@ namespace RoadRiderClient.Views
         {
             switch (pageTag)
             {
-                case "SearchPage": return typeof(SearchPage);
+                case "MapPage": return typeof(MapPage);
                 default: throw new Exception();
             }
         }
