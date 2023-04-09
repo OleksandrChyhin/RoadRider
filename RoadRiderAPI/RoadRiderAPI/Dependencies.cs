@@ -1,4 +1,5 @@
 ﻿using RoadRiderAPI.Core.HttpsClientServices;
+using RoadRiderAPI.Core.MapboxAPIs.Directions;
 using RoadRiderAPI.Core.MapboxAPIs.Geocodings;
 
 namespace RoadRiderAPI
@@ -13,6 +14,7 @@ namespace RoadRiderAPI
             services.AddScoped<IHttpClientService, HttpClientService>();
             services.AddHttpClient();
             services.AddScoped<IGeocodingService, GeocodingService>();
+            services.AddScoped<IDirectionsService, DirectionsService>();
         }
 
     }
