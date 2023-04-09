@@ -9,7 +9,5 @@ namespace RoadRiderAPI.MapboxModels.Directions
         public IEnumerable<double> Location { get; set; }
 
         public double Distance { get; set; }
-
-
     }
 }

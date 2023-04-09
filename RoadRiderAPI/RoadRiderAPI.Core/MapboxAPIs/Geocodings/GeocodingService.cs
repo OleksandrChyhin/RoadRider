@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RoadRiderAPI.Core.HttpsClientServices;
-using RoadRiderAPI.MapboxModels;
 using RoadRiderAPI.MapboxModels.Geocoding;
 using ViewModels;
 
@@ -26,6 +25,13 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
             var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
             return result.Features.Select(x => MapToGeocodingOutputModel(x));
         }
+
+        public async Task<IEnumerable<GeocodingOutputModel>> GetGeolocationByPlacementTypeAsync(string search, double latitude, double longtitude, string type, int limit)
+        {
+            var url = $"{BaseUrl}{Endpoint}/{search}.json{TokenParameter}&type={type}&proximity={longtitude:#.000},{latitude:#.000}&{limit}";
+            var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
+            return result.Features.Where(x => x.PlaceType.Contains(type)).Select(x => MapToGeocodingOutputModel(x));
+        }        
 
         public async Task<GeocodingOutputModel> ReverseGeocodingAsync(double latitude, double longtitude /*, string language ="u s", int limit = 5*/)
         {

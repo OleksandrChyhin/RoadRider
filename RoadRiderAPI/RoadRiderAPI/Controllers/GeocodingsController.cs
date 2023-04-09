@@ -31,7 +31,7 @@ namespace RoadRiderAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-  
+
         [HttpGet("ReverseGeocoding")]
         public async Task<IActionResult> GetReverseGeocoding(double latitude, double longtitude)
         {
@@ -44,6 +44,22 @@ namespace RoadRiderAPI.Controllers
             {
                 _logger.LogError(ex, ex.Message);
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetGeolocationByPlacementTypeAsync")]
+        public async Task<IActionResult> GetGeolocationByPlacementType(string search, double latitude, double longtitude, string type, int limit)
+        {
+            try
+            {
+                var result = await _geocodingService.GetGeolocationByPlacementTypeAsync(search, latitude, longtitude, type, limit);
+                return Ok(result);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);                
             }
         }
 
