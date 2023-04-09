@@ -1,4 +1,4 @@
-﻿namespace RoadRiderAPI.MapboxModels
+﻿namespace RoadRiderAPI.MapboxModels.Geocoding
 {
     public class Geometry
     {

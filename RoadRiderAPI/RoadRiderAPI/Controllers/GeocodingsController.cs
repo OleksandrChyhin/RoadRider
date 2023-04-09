@@ -18,11 +18,11 @@ namespace RoadRiderAPI.Controllers
         }
 
         [HttpGet("ForwardGeocoding")]
-        public async Task<IActionResult> GetForwardGeocoding(string query)
+        public async Task<IActionResult> GetForwardGeocodingAsync(string query)
         {
             try
             {
-                var result = await _geocodingService.ForwardGeocoding(query);
+                var result = await _geocodingService.ForwardGeocodingAsync(query);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -31,13 +31,13 @@ namespace RoadRiderAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+  
         [HttpGet("ReverseGeocoding")]
-        public async Task<IActionResult> GetReverseGeocoding(double longtitude, double latitude)
+        public async Task<IActionResult> GetReverseGeocoding(double latitude, double longtitude)
         {
             try
             {
-                var result = await _geocodingService.ReverseGeocoding(longtitude, latitude);
+                var result = await _geocodingService.ReverseGeocodingAsync(latitude, longtitude);
                 return Ok(result);
             }
             catch (Exception ex)

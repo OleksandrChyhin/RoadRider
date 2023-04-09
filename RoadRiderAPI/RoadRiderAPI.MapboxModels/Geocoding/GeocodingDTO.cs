@@ -1,4 +1,4 @@
-﻿namespace RoadRiderAPI.MapboxModels
+﻿namespace RoadRiderAPI.MapboxModels.Geocoding
 {
     public class GeocodingDTO
     {
@@ -8,7 +8,7 @@
 
         public IEnumerable<string> PlaceType { get; set; }
 
-        public double Relevance { get; set; }       
+        public double Relevance { get; set; }
 
         public string PlaceName { get; set; }
 

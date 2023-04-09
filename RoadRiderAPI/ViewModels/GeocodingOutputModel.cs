@@ -1,4 +1,4 @@
-﻿using RoadRiderAPI.MapboxModels;
+﻿using RoadRiderAPI.MapboxModels.Geocoding;
 
 namespace ViewModels
 {
