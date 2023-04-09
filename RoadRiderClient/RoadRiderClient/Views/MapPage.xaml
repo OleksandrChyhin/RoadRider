@@ -5,26 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:models="using:RoadRiderClient.Models"
     mc:Ignorable="d"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <maps:MapControl x:Name="Map"
                          Style="Aerial3DWithRoads"
-
                          ZoomInteractionMode="GestureAndControl"
                          TiltInteractionMode="GestureAndControl"
+                         TrafficFlowVisible="True"
+                         BusinessLandmarksVisible="False"
+                         LandmarksVisible="False"
+                         Center="{x:Bind ViewModel.Geopoint, Mode=TwoWay}"
                          MapServiceToken="{x:Bind ViewModel.MapToken, Mode=OneTime}"
                          Loading="Map_Loading">
-            <Grid Width="400"
+            <Grid Width="450"
                   MinHeight="50"
                   Height="auto"
+                  MaxHeight="600"
                   Margin="15"
                   Padding="5"
                   CornerRadius="20"
-                  Background="#4C000000">
+                  Background="#99000000">
 
                 <Pivot>
                     <PivotItem x:Uid="MapPageSearchPivot">
@@ -32,32 +35,98 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <AutoSuggestBox Grid.Row="0"
-                                        x:Uid="MapPageAutoSuggestBox"
-                                        Margin="10"
-                                        QueryIcon="Find"
-                                        ItemsSource="{x:Bind ViewModel.Suggestions, Mode=OneTime}"
-                                        Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay}"
-                                        TextChanged="AutoSuggestBox_TextChanged"
-                                        QuerySubmitted="AutoSuggestBox_QuerySubmitted">
-                            </AutoSuggestBox>
+                                            x:Uid="MapPageCityAutoSuggestBox"
+                                            Margin="10"
+                                            QueryIcon="Find"
+                                            ItemsSource="{x:Bind ViewModel.CitySearchSuggestions, Mode=OneTime}"
+                                            Text="{x:Bind ViewModel.CitySearchQuery, Mode=TwoWay}"
+                                            TextChanged="CityAutoSuggestBox_TextChanged"
+                                            QuerySubmitted="CityAutoSuggestBox_QuerySubmitted"/>
 
-                            <StackPanel Grid.Row="1" Margin="0, 0, 0, 10">
-                                <TextBlock Text="{x:Bind ViewModel.SelectedGeocoding.PlaceName, Mode=TwoWay}"/>
-                            </StackPanel>
+                            <AutoSuggestBox Grid.Row="1"
+                                            PlaceholderText="Search"
+                                            Margin="10"
+                                            QueryIcon="Find"
+                                            Text="{x:Bind ViewModel.PoiSearcQuery, Mode=TwoWay}"
+                                            TextChanged="AutoSuggestBox_TextChanged"/>
+
+                            <ListView Grid.Row="2"
+                                      Margin="10, 0, 10, 10"
+                                      ItemsSource="{x:Bind ViewModel.Pois, Mode=OneTime}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedPoi, Mode=TwoWay}"
+                                      SelectionChanged="ListView_SelectionChanged"
+                                      ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:GeocodingDTO">
+                                        <Grid Padding="0, 10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="auto" />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock FontWeight="Bold"
+                                                       Text="{x:Bind Text}"
+                                                       Grid.Row="0"/>
+                                            <TextBlock Text="{x:Bind PlaceName}"
+                                                       TextWrapping="Wrap"
+                                                       Grid.Row="1"/>
+                                            <TextBlock Text="{x:Bind Category}"
+                                                       TextWrapping="Wrap"
+                                                       Grid.Row="2"/>
+                                            <StackPanel Grid.Row="3"
+                                                        Orientation="Horizontal">
+                                                <TextBlock x:Uid="LatTextBlock"
+                                                           Padding="0, 0, 5, 0"/>
+                                                <TextBlock Text="{x:Bind Coordinates.Latitude}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="4"
+                                                        Orientation="Horizontal">
+                                                <TextBlock x:Uid="LongTextBlock"
+                                                           Padding="0, 0, 5, 0"/>
+                                                <TextBlock Text="{x:Bind Coordinates.Longtitude}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </Grid>
                     </PivotItem>
 
                     <PivotItem x:Uid="MapPageDirectionPivot">
-                        <StackPanel>
-                            <TextBlock Text="Direction"/>
-                            <TextBlock Text="Direction"/>
-                            <TextBlock Text="Direction"/>
-                            <TextBlock Text="Direction"/>
-                            <TextBlock Text="Direction"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <SymbolIcon Grid.Column="0"
+                                        Grid.Row="0"
+                                        Symbol="MapPin"
+                                        Foreground="White"/>
+
+                            <AutoSuggestBox Grid.Row="0"
+                                            Grid.Column="1"/>
+
+                            <SymbolIcon Grid.Column="0"
+                                        Grid.Row="1"
+                                        Symbol="MapPin"
+                                        Foreground="Red"/>
+
+                            <AutoSuggestBox Grid.Row="1"
+                                            Grid.Column="1"/>
+                        </Grid>
                     </PivotItem>
                 </Pivot>
             </Grid>

@@ -31,7 +31,7 @@ namespace RoadRiderClient.Views
             {
                 if (args.IsSettingsSelected)
                 {
-                    //ContentFrame.Navigate(typeof(SettingsPage));
+                    ContentFrame.Navigate(typeof(SettingsPage));
                 }
                 else
                 {

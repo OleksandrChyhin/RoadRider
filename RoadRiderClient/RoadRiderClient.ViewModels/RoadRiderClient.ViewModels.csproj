@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="MainPageViewModel.cs" />
     <Compile Include="MapViewModel.cs" />
+    <Compile Include="SettingsViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\RoadRiderClient.ViewModels.rd.xml" />

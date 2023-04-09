@@ -12,6 +12,8 @@
 
         public string PlaceName { get; set; }
 
+        public string Text { get; set; }
+
         public Geometry Geometry { get; set; }
 
         public Properties Properties { get; set; }

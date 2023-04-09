@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RoadRiderClient.Shared.Extensions
 {
@@ -9,6 +10,17 @@ namespace RoadRiderClient.Shared.Extensions
             foreach (var item in source)
             {
                 collection.Add(item);
+            }
+        }
+
+        public static void Remove<T>(this ICollection<T> collection, Func<T, bool> predicate)
+        {
+            foreach (var item in collection)
+            {
+                if (predicate(item))
+                {
+                    collection.Remove(item);
+                }
             }
         }
     }
