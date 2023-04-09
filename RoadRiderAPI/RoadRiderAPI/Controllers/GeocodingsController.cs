@@ -47,8 +47,8 @@ namespace RoadRiderAPI.Controllers
             }
         }
 
-        [HttpGet("GetGeolocationByPlacementTypeAsync")]
-        public async Task<IActionResult> GetGeolocationByPlacementType(string search, double latitude, double longtitude, string type, int limit)
+        [HttpGet("GeolocationByPlacementType")]
+        public async Task<IActionResult> GetGeolocationByPlacementTypeAsync(string search, double latitude, double longtitude, string type, int limit)
         {
             try
             {
