@@ -121,6 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MainPageViewModel.cs" />
+    <Compile Include="MapViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\RoadRiderClient.ViewModels.rd.xml" />
@@ -137,6 +138,14 @@
     <ProjectReference Include="..\RoadRiderClient.Core\RoadRiderClient.Core.csproj">
       <Project>{699af1a8-f5ed-438f-9900-1c8e41230728}</Project>
       <Name>RoadRiderClient.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoadRiderClient.Models\RoadRiderClient.Models.csproj">
+      <Project>{9586e4a1-9439-4d9d-ae49-264f4c8bbab7}</Project>
+      <Name>RoadRiderClient.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoadRiderClient.Shared\RoadRiderClient.Shared.csproj">
+      <Project>{3c85bbb1-62d8-44fc-93b2-9f9d84c064d2}</Project>
+      <Name>RoadRiderClient.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -19,7 +19,7 @@ namespace RoadRiderAPI.Controllers
         }
 
         [HttpPost("RetrieweDirection")]
-        public async Task<IActionResult> PostRetriweDirectionAsync(string code, [System.Web.Http.FromBody] ICollection<PointDTO> points)
+        public async Task<IActionResult> PostRetriweDirectionAsync(string code, [FromBody] IEnumerable<PointDTO> points)
         {         
             try
             {

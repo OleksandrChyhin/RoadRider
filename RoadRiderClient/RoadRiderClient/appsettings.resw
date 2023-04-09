@@ -120,4 +120,7 @@
   <data name="BaseServerUrl" xml:space="preserve">
     <value>https://localhost:7267</value>
   </data>
+  <data name="MapToken" xml:space="preserve">
+    <value>1TEdZYHll7xXLTSRXMq6~J9XCHglCsAsXL6fYESnSqg~AoZv16Jcwg2RGorOh6KHakZigSs6_QxhEsf8VUyvHFd7xvElYJ-cPEEfOcsbEBKG</value>
+  </data>
 </root>

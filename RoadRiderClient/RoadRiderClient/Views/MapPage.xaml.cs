@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RoadRiderClient.Core.Builders.ContentDialogs;
+using RoadRiderClient.Core.Directors.ContentDialogs;
+using RoadRiderClient.Shared;
+using RoadRiderClient.ViewModels;
+using System;
+using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Controls.Maps;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,29 +18,64 @@ namespace RoadRiderClient.Views
     /// </summary>
     public sealed partial class MapPage : Page
     {
+        MapViewModel ViewModel { get; set; }
+        IContentDialogDirector ContentDialogDirector { get; set; }
+
         public MapPage()
         {
             InitializeComponent();
 
-            Navigation.SelectedItem = Navigation.MenuItems[0];
+            var container = (Application.Current as App).Container;
+
+            ViewModel = container.GetRequiredService<MapViewModel>();
+            ContentDialogDirector = container.GetRequiredService<IContentDialogDirector>();
+            ContentDialogDirector.Builder = container.GetRequiredService<IContentDialogBuilder>();
         }
 
-        void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        async void Map_Loading(FrameworkElement sender, object args)
         {
-            if (args.SelectedItem is NavigationViewItem navigationViewItem)
+            if (await Geolocator.RequestAccessAsync() == GeolocationAccessStatus.Allowed)
             {
-                ContentFrame.Navigate(GetPageType(navigationViewItem.Tag.ToString()));
+                var geolocator = new Geolocator();
+                var position = await geolocator.GetGeopositionAsync();
+                var location = position.Coordinate.Point;
+
+                await Map.TrySetSceneAsync(MapScene.CreateFromLocation(location));
+                Map.LandmarksVisible = true;
             }
         }
 
-        Type GetPageType(string pageTag)
+        async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            switch (pageTag)
+            try
             {
-                case "SearchPage": return typeof(SearchPage);
-                case "DirectionPage": return typeof(DirectionPage);
-                default: throw new Exception();
+                if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+                {
+                    await ViewModel.SearchAsync();
+                }
+            }
+            catch (Exception)
+            {
+                var dialog = ContentDialogDirector.CreateNotificationDialog(Constants.Error.Oops,
+                                                                            Constants.Error.DefaultErrorMessage);
+                await dialog.ShowAsync();
             }
         }
+
+        async void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            try
+            {
+                var geopoint = ViewModel.GetLocation(args.QueryText);
+                await Map.TrySetSceneAsync(MapScene.CreateFromLocation(geopoint));
+            }
+            catch (Exception)
+            {
+                var dialog = ContentDialogDirector.CreateNotificationDialog(Constants.Error.Oops,
+                                                                            Constants.Error.DefaultErrorMessage);
+                await dialog.ShowAsync();
+            }
+        }
+
     }
 }

@@ -9,8 +9,11 @@ namespace RoadRiderClient.Core.Settings
             var resourceLoader = ResourceLoader.GetForCurrentView("appsettings");
 
             BaseServerUrl = resourceLoader.GetString(nameof(BaseServerUrl));
+            MapToken = resourceLoader.GetString(nameof(MapToken));
         }
 
         public string BaseServerUrl { get; private set; }
+
+        public string MapToken { get; private set; }
     }
 }

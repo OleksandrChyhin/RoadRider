@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RoadRiderClient.Core.Settings;
 using RoadRiderClient.ViewModels;
 using System;
 using Windows.UI.Xaml;

@@ -29,15 +29,15 @@ namespace RoadRiderAPI.Core.MapboxAPIs.Geocodings
 
         public async Task<GeocodingOutputModel> ReverseGeocodingAsync(double latitude, double longtitude /*, string language ="u s", int limit = 5*/)
         {
-            var url = $"{BaseUrl}{Endpoint}/{latitude},{longtitude}.json{TokenParameter}";
+            var url = $"{BaseUrl}{Endpoint}/{longtitude:#.000},{latitude:#.000}.json{TokenParameter}";
             var result = await _httpClientService.GetAsync<GeocodingResponseObject>(url);
             return result.Features.Select(x => MapToGeocodingOutputModel(x)).First();
         }
 
         GeocodingOutputModel MapToGeocodingOutputModel(GeocodingDTO geocodingDTO)
         {
-            var latitude = geocodingDTO.Geometry.Coordinates.ElementAt(0);
-            var longtitude = geocodingDTO.Geometry.Coordinates.ElementAt(1);
+            var longtitude = geocodingDTO.Geometry.Coordinates.ElementAt(0);
+            var latitude = geocodingDTO.Geometry.Coordinates.ElementAt(1);
             var geocodingOutputModel = new GeocodingOutputModel
             {
                 Id = geocodingDTO.Id,

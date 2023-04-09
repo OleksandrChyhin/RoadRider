@@ -6,30 +6,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <Style x:Key="LocationLabelStyle" TargetType="TextBlock">
-            <Setter Property="HorizontalTextAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="10, 0, 0, 0"/>
-        </Style>
-
-        <Style x:Key="LocationInputStyle" TargetType="AutoSuggestBox">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="MinWidth" Value="100"/>
-            <Setter Property="Width" Value="300"/>
-        </Style>
-
-        <Style x:Key="GridMargin" TargetType="Grid">
-            <Setter Property="Margin" Value="0, 20, 0, 0"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
-        <maps:MapControl Width="auto"
-                         Height="auto"
-                         x:Name="Map">
+        <maps:MapControl x:Name="Map"
+                         Style="Aerial3DWithRoads"
+
+                         ZoomInteractionMode="GestureAndControl"
+                         TiltInteractionMode="GestureAndControl"
+                         MapServiceToken="{x:Bind ViewModel.MapToken, Mode=OneTime}"
+                         Loading="Map_Loading">
             <Grid Width="400"
                   MinHeight="50"
                   Height="auto"
@@ -38,30 +26,40 @@
                   CornerRadius="20"
                   Background="#4C000000">
 
-                <NavigationView x:Name="Navigation"
-                                Background="Transparent"
-                                PaneDisplayMode="Top"
-                                IsBackButtonVisible="Collapsed"
-                                IsSettingsVisible="False"
-                                SelectionChanged="Navigation_SelectionChanged">
+                <Pivot>
+                    <PivotItem x:Uid="MapPageSearchPivot">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-                    <NavigationView.Resources>
-                        <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="Transparent" />
-                    </NavigationView.Resources>
+                            <AutoSuggestBox Grid.Row="0"
+                                        x:Uid="MapPageAutoSuggestBox"
+                                        Margin="10"
+                                        QueryIcon="Find"
+                                        ItemsSource="{x:Bind ViewModel.Suggestions, Mode=OneTime}"
+                                        Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay}"
+                                        TextChanged="AutoSuggestBox_TextChanged"
+                                        QuerySubmitted="AutoSuggestBox_QuerySubmitted">
+                            </AutoSuggestBox>
 
-                    <NavigationView.MenuItems>
+                            <StackPanel Grid.Row="1" Margin="0, 0, 0, 10">
+                                <TextBlock Text="{x:Bind ViewModel.SelectedGeocoding.PlaceName, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Grid>
+                    </PivotItem>
 
-                        <NavigationViewItem x:Uid="MapPageNavigationBarItemSearch"
-                                            Tag="SearchPage"/>
-
-                        <NavigationViewItem x:Uid="MapPageNavigationBarItemDirection"
-                                            Tag="DirectionPage"/>
-
-                    </NavigationView.MenuItems>
-
-                    <Frame x:Name="ContentFrame"/>
-
-                </NavigationView>
+                    <PivotItem x:Uid="MapPageDirectionPivot">
+                        <StackPanel>
+                            <TextBlock Text="Direction"/>
+                            <TextBlock Text="Direction"/>
+                            <TextBlock Text="Direction"/>
+                            <TextBlock Text="Direction"/>
+                            <TextBlock Text="Direction"/>
+                        </StackPanel>
+                    </PivotItem>
+                </Pivot>
             </Grid>
         </maps:MapControl>
     </Grid>
