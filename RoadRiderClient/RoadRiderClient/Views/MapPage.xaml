@@ -73,24 +73,31 @@
                                             </Grid.RowDefinitions>
                                             <TextBlock FontWeight="Bold"
                                                        Text="{x:Bind Text}"
+                                                       Foreground="White"
                                                        Grid.Row="0"/>
                                             <TextBlock Text="{x:Bind PlaceName}"
                                                        TextWrapping="Wrap"
+                                                       Foreground="White"
                                                        Grid.Row="1"/>
                                             <TextBlock Text="{x:Bind Category}"
                                                        TextWrapping="Wrap"
+                                                       Foreground="White"
                                                        Grid.Row="2"/>
                                             <StackPanel Grid.Row="3"
                                                         Orientation="Horizontal">
                                                 <TextBlock x:Uid="LatTextBlock"
+                                                           Foreground="White"
                                                            Padding="0, 0, 5, 0"/>
-                                                <TextBlock Text="{x:Bind Coordinates.Latitude}"/>
+                                                <TextBlock Text="{x:Bind Coordinates.Latitude}"
+                                                           Foreground="White"/>
                                             </StackPanel>
                                             <StackPanel Grid.Row="4"
                                                         Orientation="Horizontal">
                                                 <TextBlock x:Uid="LongTextBlock"
+                                                           Foreground="White"
                                                            Padding="0, 0, 5, 0"/>
-                                                <TextBlock Text="{x:Bind Coordinates.Longtitude}"/>
+                                                <TextBlock Text="{x:Bind Coordinates.Longtitude}"
+                                                           Foreground="White"/>
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>
